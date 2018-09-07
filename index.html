@@ -23,18 +23,15 @@
              + '&client_secret=' + client_secret 
              + '&code=' + token 
              + '&response_type=code&redirect_uri=' + url;
-            $.get(corsUrl+newLocation, function(data){
 
+            $.get(corsUrl+newLocation, function(data){
                 acessToken = data.split("&");
                 acessToken = getParameterByName(acessToken);
+                accessToken = accessToken.access_token;
+
             });
         }
-        else
-        {
-
-        }
         
-
     }
 
     function getParameterByName(parameters) {
@@ -46,44 +43,9 @@
         return result;
     }
 
-
-    // Função para obter parametros passados via Query String
-    function getSpotifyVariable(variable) {
-        var query = window.location.hash.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            if (pair[0] == variable) { return pair[1]; }
+    function getUserInfo() {
+            window.location = 'https://api.github.com/user?access_token=' + accessToken;
         }
-        return (false);
-    }
-
-    function onLoad() {
-        $.ajax({
-            url: 'https://api.spotify.com/v1/search',
-            data: {
-                type: 'track',
-                q: $('#query').val()
-            },
-            headers: {
-                Authorization: 'Bearer ' + token
-            },
-            dataType: "json",
-            success: function (data) {
-                var strSaida = '';
-
-                for (i = 0; i < data.tracks.items.length; i++) {
-                    strSaida += 'Musica: <a href="#" onclick="javascript:play(\'' +
-                        data.tracks.items[i].preview_url + '\')">' +
-                        data.tracks.items[i].album.name +
-                        '- ' + data.tracks.items[i].name + '</a><br>';
-                }
-
-                $('#conteudo').html('<p>Total de Musicas: ' + data.tracks.items.length + '</p>' +
-                    strSaida);
-            }
-        });
-    }
 
 </script>
 </head>
