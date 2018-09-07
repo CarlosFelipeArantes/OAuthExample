@@ -31,8 +31,11 @@
                 accessToken = accessToken.access_token;
 
             });
-        }
-        
+        }    
+    }
+
+    function acessarRepos() {
+        window.location = 'https://api.github.com/user/repos?access_token=' + accessToken;
     }
 
     function getParameterByName(parameters) {
@@ -44,15 +47,12 @@
         return result;
     }
 
-    function acessarRepos() {
-            window.location = 'https://api.github.com/user/repos?access_token=' + accessToken;
-        }
 
 </script>
 </head>
 
 <BODY onload='load()'>
-    <button type="button" class="btn btn-info" onclick="acessarRepos()">Meus Repositórios</button>
+    <button onclick="acessarRepos()">Meus Repositórios</button>
 </BODY>
 
 </HTML>
