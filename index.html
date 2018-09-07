@@ -20,12 +20,14 @@
             var newLocation =  'https://github.com/login/oauth/access_token?client_id=' + client_id
              + '&client_secret=' + client_secret 
              + '&code=' + token 
-             +'&response_type=code&redirect_uri=' + url;
+             + '&response_type=code&redirect_uri=' + url;
             $.ajax({
                 url: newLocation,
                 type: "POST",
                 success: function (data) {
-                    tokenB = data.acess_token;
+                    tokenB = data;
+                    console.log(tokenB);
+                    alert(tokenB);
                 }
             });
         }
