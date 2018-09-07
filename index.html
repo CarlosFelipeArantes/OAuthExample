@@ -3,11 +3,49 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script>
             var token = '';
+            var tokenB = '';
+            var client_secret ='27cebaf65d1e1fea1f4ccd9c781f63821981cc8c';
             var client_id = '25618ca1a7701046d8b9'; // Application ID - Substitua pelo seu APP ID
             var url = 'https://carlosfelipearantes.github.io/OAuthExample/index.html'; // URL da sua página - Substitua pela sua
-            var audio;
-    
-            // Função para obter parametros passados via Query String
+            
+            if (token='')
+            {
+                window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + url;
+            }
+            else if (!tokenB)
+            {
+                token = getParameterByName();
+                token = token.code;
+                var newLocation =  'https://github.com/login/oauth/authorize?client_id=' + client_id 
+                +'&client_secret=' + client_secret
+                +'&code=' + token 
+                +'&response_type=token&redirect_uri=' 
+                + url;
+                $.ajax({
+                    url: newLocation,
+                    type: "POST",
+                    success: function (data) {
+                        tokenB = data.acess_token;
+                    }
+                });
+            }else{
+
+                
+
+            }
+                
+            
+            function getParameterByName() {
+                var result = {}, keyValuePairs = location.search.slice(1).split("&");
+                keyValuePairs.forEach(function (keyValuePair) {
+                keyValuePair = keyValuePair.split('=');
+                result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
+                });
+                return result;
+            }
+            
+            
+                // Função para obter parametros passados via Query String
             function getSpotifyVariable(variable) {
                 var query = window.location.hash.substring(1);
                 var vars = query.split("&");
@@ -49,12 +87,7 @@
                 audio = new Audio(url);
                 audio.play();
             }
-    
-            // Verifica se a token foi passada na URL, senão desvia 
-            // para o Spotify para pegar a token de acesso       
-            token = getSpotifyVariable('access_token');
-            if (!token)
-                window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + url;
+        
         </script>
         <title>Document</title>
         <style>
@@ -64,7 +97,7 @@
             }
         </style>
     </head>
-<BODY onLoad="onLoad()">
+<BODY>
     Teste   
 </BODY>  
 </HTML>
