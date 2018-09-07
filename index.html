@@ -4,7 +4,7 @@
 <script>
     function load() {
         var token = '';
-        var acessToken = '';
+        var accessToken = '';
         var client_secret = '27cebaf65d1e1fea1f4ccd9c781f63821981cc8c';
         var client_id = '25618ca1a7701046d8b9'; // Application ID - Substitua pelo seu APP ID
         var url = 'https://carlosfelipearantes.github.io/OAuthExample/index.html'; // URL da sua página - Substitua pela sua
@@ -12,7 +12,7 @@
         if (url===location.href){
             window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=code&redirect_uri=' + url;
         }
-        else if (!acessToken)
+        else if (!accessToken)
         {
             var locationToken = location.search.slice(1).split("&");
             token = getParameterByName(locationToken);
@@ -25,9 +25,9 @@
              + '&response_type=code&redirect_uri=' + url;
 
             $.get(corsUrl+newLocation, function(data){
-                acessToken = data.split("&");
-                acessToken = getParameterByName(acessToken);
-                acessToken = accessToken.access_token;
+                accessToken = data.split("&");
+                accessToken = getParameterByName(accessToken);
+                accessToken = accessToken.access_token;
 
             });
         }
