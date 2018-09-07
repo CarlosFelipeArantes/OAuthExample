@@ -24,6 +24,9 @@
             $.ajax({
                 url: newLocation,
                 type: "POST",
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function (data) {
                     tokenB = data;
                     console.log(tokenB);
