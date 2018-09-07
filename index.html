@@ -10,18 +10,17 @@
         var url = 'https://carlosfelipearantes.github.io/OAuthExample/index.html'; // URL da sua página - Substitua pela sua
 
         if (url===location.href){
-            window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + url;
+            window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=code&redirect_uri=' + url;
         }
         else if (!tokenB)
         {
             alert("Entrei");
             token = getParameterByName();
             token = token.code;
-            var newLocation =  'https://github.com/login/oauth/acess_token?client_id=' + client_id 
-            +'&client_secret=' + client_secret
-            +'&code=' + token 
-            +'&response_type=token&redirect_uri=' 
-            + url;
+            var newLocation =  'https://github.com/login/oauth/access_token?client_id=' + client_id
+             + '&client_secret=' + client_secret 
+             + '&code=' + token 
+             +'&response_type=code&redirect_uri=' + url;
             $.ajax({
                 url: newLocation,
                 type: "POST",
