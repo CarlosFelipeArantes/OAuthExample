@@ -43,7 +43,7 @@
         return result;
     }
 
-    function getUserInfo() {
+    function acessarRepos() {
             window.location = 'https://api.github.com/user/repos?access_token=' + accessToken;
         }
 
@@ -51,7 +51,7 @@
 </head>
 
 <BODY onload='load()'>
-    Nada
+    <button type="button" class="btn btn-info" onclick="acessarRepos()">Meus Repositórios</button>
 </BODY>
 
 </HTML>
