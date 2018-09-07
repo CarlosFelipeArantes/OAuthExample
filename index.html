@@ -24,9 +24,6 @@
             $.ajax({
                 url: newLocation,
                 type: "POST",
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                },
                 success: function (data) {
                     tokenB = data;
                     console.log(tokenB);
